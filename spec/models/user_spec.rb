@@ -153,13 +153,13 @@ describe User do
     end
     
     it "should destroy associated microposts" do
-	   microposts = @user.microposts.to_a
-	   @user.destroy 
-	   expect(microposts).not_to be_empty
-       microposts.each do |micropost|
-         expect(Micropost.where(id: micropost.id)).to be_empty
-       end
-
+      microposts = @user.microposts.to_a
+      @user.destroy 
+      expect(microposts).not_to be_empty
+      microposts.each do |micropost|
+        expect(Micropost.where(id: micropost.id)).to be_empty
+      end
+    end
      
     describe "status" do
       let(:unfollowed_post) do
@@ -180,7 +180,6 @@ describe User do
           should include(micropost)
         end
       end
-     end
     end 
   end
   
@@ -198,8 +197,8 @@ describe User do
       subject { other_user }
       its(:followers) { should include(@user) }
     end
-    
- 	describe "and unfollowing" do
+
+    describe "and unfollowing" do
       before { @user.unfollow!(other_user) }
 
       it { should_not be_following(other_user) }
